@@ -1,22 +1,30 @@
-package to;
+package dto;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class UsuarioTO {
+public class UsuarioDTO {
 
+	private int usuarioId;
 	private String login;
 	private String senha;
 
-	public UsuarioTO() {
+	public UsuarioDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public UsuarioTO(String login, String senha) {
+	public UsuarioDTO(String login, String senha) {
 		super();
 		this.login = login;
 		this.senha = senha;
+	}
+	public int getUsuarioId() {
+		return usuarioId;
+	}
+
+	public void setUsuarioId(int usuarioId) {
+		this.usuarioId = usuarioId;
 	}
 
 	public String getLogin() {

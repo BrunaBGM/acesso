@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 
 import factory.ConectionFactory;
-import to.UsuarioTO;
+import dto.UsuarioDTO;
 
 public class UsuarioDAO {
 	private Connection con = null;
@@ -16,40 +16,35 @@ public class UsuarioDAO {
 		this.con = new ConectionFactory().getConnection();
 	}
 
-	public UsuarioTO loginDAO(UsuarioTO u) {
-		
+	public UsuarioDTO Autenticar(String email, String senha) {		
 		PreparedStatement ps = null;
 		
 		try {
 			
-			String sqlStr = "SELECT * FROM T_uncleplhil_usuario WHERE DS_LOGIN = ? AND DS_SENHA = ?";
+			String sqlStr = "SELECT * FROM T_uncleplhil_usuario WHERE DS_LOGIN = '" + email + "'  AND DS_SENHA = '" + senha + "'";
 			
-			ps = con.prepareStatement(sqlStr);
-			
-			ps.setString(1, u.getLogin());
-			ps.setString(2, u.getSenha());
-			
+			ps = con.prepareStatement(sqlStr);			
 			ResultSet rs =  ps.executeQuery();
 			
-			UsuarioTO ut = null;
+			UsuarioDTO usuarioDTO = null;
 			
 			while (rs.next()) {
-				ut = new UsuarioTO();
-				ut.setLogin(rs.getNString(1));
-				ut.setSenha(rs.getNString(2));
+				usuarioDTO = new UsuarioDTO();
+				usuarioDTO.setLogin(rs.getNString(1));
+				usuarioDTO.setSenha(rs.getNString(2));
 			}
 			
 			rs.close();
 			ps.close();
 			con.close();
 			
-			System.out.println("O USUÁRIO : " + u.getLogin() + " LOGOU ÁS " + Calendar.getInstance().getTime());
+			System.out.println("O USUï¿½RIO : " + usuarioDTO.getLogin() + " LOGOU ï¿½S " + Calendar.getInstance().getTime());
 			
-			return u;
+			return usuarioDTO;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 }

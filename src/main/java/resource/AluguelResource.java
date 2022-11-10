@@ -7,20 +7,21 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import bo.UsuarioBO;
-import dto.UsuarioDTO;
+import bo.AluguelBO;
+import dto.AluguelDTO;
 
-@Path("/login")
-public class UsuarioResource {
+@Path("/aluguel")
+public class AluguelResource {
 
-	UsuarioBO usuarioBO = new UsuarioBO();
+	AluguelBO aluguelBO = new AluguelBO();
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response loginUsuario(UsuarioDTO usuario) {
+	public Response AlugarVeiculo(AluguelDTO aluguelDTO ) {
 
-		return Response.status(200).entity(usuarioBO.Autenticar(usuario.getLogin(), usuario.getSenha())).build();
+		return Response.status(200).entity(aluguelBO.Salvar(aluguelDTO)).build();
 	}
+	
 
 }

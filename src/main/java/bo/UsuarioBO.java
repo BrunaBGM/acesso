@@ -1,13 +1,14 @@
 package bo;
 
 import dao.UsuarioDAO;
-import to.UsuarioTO;
+import dto.UsuarioDTO;
 
 public class UsuarioBO {
-	UsuarioDAO ud = null;
+	UsuarioDAO usuarioDAO;
 
-	public UsuarioTO validacao(UsuarioTO u) {
-		ud = new UsuarioDAO();
-		return ud.loginDAO(u);
+	public UsuarioDTO Autenticar(String email, String senha) {
+		usuarioDAO = new UsuarioDAO();
+		UsuarioDTO usuarioDTO = usuarioDAO.Autenticar(email, senha);
+		return usuarioDTO;
 	}
 }
